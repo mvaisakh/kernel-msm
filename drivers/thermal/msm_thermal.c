@@ -1425,7 +1425,7 @@ static void update_cpu_topology(struct device *dev)
 	int cluster_id[NR_CPUS] = {[0 ... NR_CPUS-1] = -1};
 	cpumask_t cluster_cpus[NR_CPUS];
 	uint32_t i;
-	int cluster_cnt;
+	int cluster_cnt, sync_cluster_cnt = 0;
 	struct cluster_info *temp_ptr = NULL;
 
 	cluster_info_probed = true;
@@ -1473,9 +1473,6 @@ static void update_cpu_topology(struct device *dev)
 		temp_ptr[i].freq_idx_high = 0;
 		temp_ptr[i].freq_table = NULL;
 		temp_ptr[i].entity_count = cpumask_weight(&cluster_cpus[i]);
-		for_each_cpu(idx, &temp_ptr[i].cluster_cores) {
-			cpus[idx].parent_ptr = &temp_ptr[i];
-		}
 		temp_ptr[i].child_entity_ptr = NULL;
 	}
 	core_ptr->child_entity_ptr = temp_ptr;
