@@ -1677,6 +1677,20 @@ static struct clk_freq_tbl ftbl_gcc_sdcc1_apps_clk[] = {
 	F_END
 };
 
+static struct clk_freq_tbl ftbl_gcc_sdcc1_apps_clk_8937[] = {
+	F( 144000,      xo,     16,     3,      25),
+	F( 400000,      xo,     12,     1,      4),
+	F( 20000000,    gpll0,  10,     1,      4),
+	F( 25000000,    gpll0,  16,     1,      2),
+	F( 50000000,    gpll0,  16,     0,      0),
+	F( 100000000,   gpll0,  8,      0,      0),
+	F( 177770000,   gpll0,  4.5,    0,      0),
+	F( 200000000,   gpll0,  4,      0,      0),
+	F( 384000000,   gpll4,  3,      0,      0),
+
+	F_END
+};
+
 static struct rcg_clk sdcc1_apps_clk_src = {
 	.cmd_rcgr_reg =  SDCC1_APPS_CMD_RCGR,
 	.set_rate = set_rate_mnd,
@@ -3934,10 +3948,6 @@ static struct clk_lookup msm_clocks_lookup_8952[] = {
 };
 
 static struct clk_lookup msm_clocks_lookup_8937[] = {
-	CLK_LIST(gpll0_clk_src_8937),
-	CLK_LIST(gpll0_ao_clk_src_8937),
-	CLK_LIST(gpll0_sleep_clk_src),
-	CLK_LIST(a53ss_c0_pll),
 	CLK_LIST(esc1_clk_src),
 	CLK_LIST(gcc_mdss_esc1_clk),
 	CLK_LIST(gcc_dcc_clk),
@@ -4002,76 +4012,6 @@ static int get_mmio_addr(struct platform_device *pdev, u32 nbases)
 	return 0;
 }
 
-static void override_for_8917(void)
-{
-	gpll3_clk_src.c.rate = 930000000;
-
-	OVERRIDE_FMAX3(csi0,
-		LOWER, 100000000, LOW, 200000000, NOMINAL, 266670000);
-	/* Frequency Table same as 8937 */
-	OVERRIDE_FTABLE(csi0, ftbl_gcc_camss_csi0_2_clk, 8937);
-	OVERRIDE_FMAX3(csi1,
-		LOWER, 100000000, LOW, 200000000, NOMINAL, 266670000);
-	/* Frequency Table same as 8937 */
-	OVERRIDE_FTABLE(csi1, ftbl_gcc_camss_csi0_2_clk, 8937);
-	OVERRIDE_FMAX3(csi2,
-		LOWER, 100000000, LOW, 200000000, NOMINAL, 266670000);
-	/* Frequency Table same as 8937 */
-	OVERRIDE_FTABLE(csi2, ftbl_gcc_camss_csi0_2_clk, 8937);
-
-	OVERRIDE_FMAX5(vfe0,
-		LOWER, 160000000, LOW, 266670000, NOMINAL, 320000000,
-		NOM_PLUS, 329140000, HIGH, 360000000);
-	OVERRIDE_FTABLE(vfe0, ftbl_gcc_camss_vfe0_1_clk, 8917);
-	OVERRIDE_FMAX5(vfe1,
-		LOWER, 160000000, LOW, 266670000, NOMINAL, 320000000,
-		NOM_PLUS, 329140000, HIGH, 360000000);
-	OVERRIDE_FTABLE(vfe1, ftbl_gcc_camss_vfe0_1_clk, 8917);
-	OVERRIDE_FTABLE(vcodec0, ftbl_gcc_venus0_vcodec0_clk, 8917);
-	OVERRIDE_FMAX5(vcodec0,
-		LOWER, 200000000, LOW, 270000000, NOMINAL, 308570000,
-		NOM_PLUS, 329140000, HIGH, 360000000);
-	OVERRIDE_FMAX4(cpp,
-		LOWER, 160000000, LOW, 266670000, NOMINAL, 320000000,
-		NOM_PLUS, 360000000);
-	OVERRIDE_FTABLE(cpp, ftbl_gcc_camss_cpp_clk, 8917);
-	OVERRIDE_FMAX5(jpeg0,
-		LOWER, 133330000, LOW, 200000000, NOMINAL, 266670000,
-		NOM_PLUS, 308570000, HIGH, 320000000);
-	/* Frequency Table same as 8937 */
-	OVERRIDE_FTABLE(jpeg0, ftbl_gcc_camss_jpeg0_clk, 8937);
-	OVERRIDE_FMAX5(gfx3d,
-		LOWER, 270000000, LOW, 400000000, NOMINAL, 484800000,
-		NOM_PLUS, 532200000, HIGH, 598000000);
-	OVERRIDE_FTABLE(gfx3d, ftbl_gcc_oxili_gfx3d_clk, 8917);
-	OVERRIDE_FMAX1(cci, LOWER, 37500000);
-
-	OVERRIDE_FTABLE(csi0phytimer, ftbl_gcc_camss_csi0_1phytimer_clk, 8917);
-	OVERRIDE_FMAX3(csi0phytimer, LOWER, 100000000, LOW, 200000000,
-			NOMINAL, 266670000);
-	OVERRIDE_FTABLE(csi1phytimer, ftbl_gcc_camss_csi0_1phytimer_clk, 8917);
-	OVERRIDE_FMAX3(csi1phytimer, LOWER, 100000000, LOW, 200000000,
-			NOMINAL, 266670000);
-	OVERRIDE_FMAX2(gp1, LOWER, 100000000, NOMINAL, 200000000);
-	OVERRIDE_FMAX2(gp2, LOWER, 100000000, NOMINAL, 200000000);
-	OVERRIDE_FMAX2(gp3, LOWER, 100000000, NOMINAL, 200000000);
-
-	OVERRIDE_FMAX2(byte0, LOWER, 125000000, NOMINAL, 187500000);
-	/* Frequency Table same as 8937 */
-	OVERRIDE_FTABLE(byte0, ftbl_gcc_mdss_byte0_clk, 8937);
-	byte0_clk_src.current_freq = ftbl_gcc_mdss_pclk0_clk_8937;
-
-	OVERRIDE_FMAX2(pclk0, LOWER, 166670000, NOMINAL, 250000000);
-	/* Frequency Table same as 8937 */
-	OVERRIDE_FTABLE(pclk0, ftbl_gcc_mdss_pclk0_clk, 8937);
-	pclk0_clk_src.current_freq = ftbl_gcc_mdss_pclk0_clk_8937;
-
-	OVERRIDE_FMAX2(sdcc1_apps, LOWER, 200000000, NOMINAL, 400000000);
-	OVERRIDE_FTABLE(usb_hs_system, ftbl_gcc_usb_hs_system_clk, 8917);
-	OVERRIDE_FMAX3(usb_hs_system, LOWER, 800000000, NOMINAL, 133333000,
-			HIGH, 177780000);
-}
-
 static void override_for_8937(void)
 {
 	gpll3_clk_src.c.rate = 900000000;
@@ -4115,14 +4055,12 @@ static void override_for_8937(void)
 	OVERRIDE_FMAX2(gp2, LOWER, 100000000, NOMINAL, 200000000);
 	OVERRIDE_FMAX2(gp3, LOWER, 100000000, NOMINAL, 200000000);
 	OVERRIDE_FMAX2(byte0, LOWER, 125000000, NOMINAL, 187500000);
-	OVERRIDE_FTABLE(byte0, ftbl_gcc_mdss_byte0_clk, 8937);
-	OVERRIDE_FMAX2(byte1, LOWER, 125000000, NOMINAL, 187500000);
-	byte0_clk_src.current_freq = ftbl_gcc_mdss_byte0_clk_8937;
+	OVERRIDE_FTABLE(byte0, ftbl_gcc_mdss_byte0_clk);
+	byte0_clk_src.current_freq = ftbl_gcc_mdss_pclk0_clk_8937;
 	OVERRIDE_FMAX2(pclk0, LOWER, 166670000, NOMINAL, 250000000);
-	OVERRIDE_FTABLE(pclk0, ftbl_gcc_mdss_pclk0_clk, 8937);
-	OVERRIDE_FMAX2(pclk1, LOWER, 166670000, NOMINAL, 250000000);
+	OVERRIDE_FTABLE(pclk0, ftbl_gcc_mdss_pclk0_clk);
 	pclk0_clk_src.current_freq = ftbl_gcc_mdss_pclk0_clk_8937;
-	OVERRIDE_FTABLE(vcodec0, ftbl_gcc_venus0_vcodec0_clk, 8937);
+	OVERRIDE_FTABLE(vcodec0, ftbl_gcc_venus0_vcodec0_clk);
 	OVERRIDE_FMAX5(vcodec0,
 		LOWER, 166150000, LOW, 240000000, NOMINAL, 308570000,
 		NOM_PLUS, 320000000, HIGH, 360000000);
@@ -4218,22 +4156,8 @@ static int msm_gcc_probe(struct platform_device *pdev)
 	regval |= BIT(0);
 	writel_relaxed(regval, GCC_REG_BASE(APCS_GPLL_ENA_VOTE));
 
-	if (compat_bin) {
-		gpll0_clk_src.c.parent = &gpll0_clk_src_8937.c;
-		gpll0_ao_clk_src.c.parent = &gpll0_ao_clk_src_8937.c;
-		/* Oxili Ocmem in GX rail: OXILI_GMEM_CLAMP_IO */
-		regval = readl_relaxed(GCC_REG_BASE(GX_DOMAIN_MISC));
-		regval &= ~BIT(0);
-		writel_relaxed(regval, GCC_REG_BASE(GX_DOMAIN_MISC));
+	if (compat_bin)
 		override_for_8937();
-	} else if (compat_bin2) {
-		gpll0_clk_src.c.parent = &gpll0_clk_src_8937.c;
-		gpll0_ao_clk_src.c.parent = &gpll0_ao_clk_src_8937.c;
-		override_for_8917();
-	} else {
-		gpll0_clk_src.c.parent = &gpll0_clk_src_8952.c;
-		gpll0_ao_clk_src.c.parent = &gpll0_ao_clk_src_8952.c;
-	}
 
 	ret = of_msm_clock_register(pdev->dev.of_node,
 				msm_clocks_lookup_common,
@@ -4251,8 +4175,8 @@ static int msm_gcc_probe(struct platform_device *pdev)
 					ARRAY_SIZE(msm_clocks_lookup_8917));
 	else
 		ret = of_msm_clock_register(pdev->dev.of_node,
-					msm_clocks_lookup_8952,
-					ARRAY_SIZE(msm_clocks_lookup_8952));
+					msm_clocks_lookup_8937,
+					ARRAY_SIZE(msm_clocks_lookup_8937));
 	if (ret)
 		return ret;
 
@@ -4298,7 +4222,6 @@ static int msm_gcc_probe(struct platform_device *pdev)
 static struct of_device_id msm_clock_gcc_match_table[] = {
 	{ .compatible = "qcom,gcc-8952" },
 	{ .compatible = "qcom,gcc-8937" },
-	{ .compatible = "qcom,gcc-8917" },
 	{},
 };
 
@@ -4417,9 +4340,6 @@ static int msm_clock_debug_probe(struct platform_device *pdev)
 	compat_bin = of_device_is_compatible(pdev->dev.of_node,
 					"qcom,cc-debug-8937");
 
-	compat_bin2 = of_device_is_compatible(pdev->dev.of_node,
-					"qcom,cc-debug-8917");
-
 	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "meas");
 	if (!res) {
 		dev_err(&pdev->dev, "GLB clock diag base not defined.\n");
@@ -4443,7 +4363,7 @@ static int msm_clock_debug_probe(struct platform_device *pdev)
 			msm_clocks_measure, ARRAY_SIZE(msm_clocks_measure));
 	else
 		ret =  of_msm_clock_register(pdev->dev.of_node,
-				msm_clocks_measure_8937,
+				msm_clocks_measure,
 				ARRAY_SIZE(msm_clocks_measure_8937));
 	if (ret) {
 		dev_err(&pdev->dev, "Failed to register debug Mux\n");
@@ -4457,7 +4377,6 @@ static int msm_clock_debug_probe(struct platform_device *pdev)
 static struct of_device_id msm_clock_debug_match_table[] = {
 	{ .compatible = "qcom,cc-debug-8952" },
 	{ .compatible = "qcom,cc-debug-8937" },
-	{ .compatible = "qcom,cc-debug-8917" },
 	{}
 };
 
@@ -4575,7 +4494,6 @@ byte0_fail:
 static struct of_device_id msm_clock_mdss_match_table[] = {
 	{ .compatible = "qcom,gcc-mdss-8952" },
 	{ .compatible = "qcom,gcc-mdss-8937" },
-	{ .compatible = "qcom,gcc-mdss-8917" },
 	{}
 };
 

@@ -574,18 +574,6 @@ static struct msm_soc_info cpu_of_id[] = {
 	[294] = {MSM_CPU_8937, "MSM8937"},
 	[295] = {MSM_CPU_8937, "APQ8937"},
 
-	/* MSM8917 IDs */
-	[303] = {MSM_CPU_8917, "MSM8917"},
-	[307] = {MSM_CPU_8917, "APQ8017"},
-	[308] = {MSM_CPU_8917, "MSM8217"},
-	[309] = {MSM_CPU_8917, "MSM8617"},
-
-	/* MSM8920 IDs */
-	[320] = {MSM_CPU_8920, "MSM8920"},
-
-	/* MSM8940 IDs */
-	[313] = {MSM_CPU_8940, "MSM8940"},
-
 	/* Uninitialized IDs are not known to run Linux.
 	   MSM_CPU_UNKNOWN is set to 0 to ensure these IDs are
 	   considered as unknown CPU. */
@@ -1295,37 +1283,9 @@ static void * __init setup_dummy_socinfo(void)
 		dummy_socinfo.id = 324;
 		strlcpy(dummy_socinfo.build_id, "sda660 - ",
 			sizeof(dummy_socinfo.build_id));
-	} else if (early_machine_is_sdm658()) {
-		dummy_socinfo.id = 325;
-		strlcpy(dummy_socinfo.build_id, "sdm658 - ",
-			sizeof(dummy_socinfo.build_id));
-	} else if (early_machine_is_sda658()) {
-		dummy_socinfo.id = 326;
-		strlcpy(dummy_socinfo.build_id, "sda658 - ",
-			sizeof(dummy_socinfo.build_id));
-	} else if (early_machine_is_sdm630()) {
-		dummy_socinfo.id = 318;
-		strlcpy(dummy_socinfo.build_id, "sdm630 - ",
-			sizeof(dummy_socinfo.build_id));
-	} else if (early_machine_is_sda630()) {
-		dummy_socinfo.id = 327;
-		strlcpy(dummy_socinfo.build_id, "sda630 - ",
-			sizeof(dummy_socinfo.build_id));
-	} else if (early_machine_is_sdm636()) {
-		dummy_socinfo.id = 345;
-		strlcpy(dummy_socinfo.build_id, "sdm636 - ",
-			sizeof(dummy_socinfo.build_id));
-	} else if (early_machine_is_msm8917()) {
-		dummy_socinfo.id = 303;
-		strlcpy(dummy_socinfo.build_id, "msm8917 - ",
-			sizeof(dummy_socinfo.build_id));
-	} else if (early_machine_is_msm8920()) {
-		dummy_socinfo.id = 320;
-		strlcpy(dummy_socinfo.build_id, "msm8920 - ",
-			sizeof(dummy_socinfo.build_id));
-	} else if (early_machine_is_msm8940()) {
-		dummy_socinfo.id = 313;
-		strlcpy(dummy_socinfo.build_id, "msm8940 - ",
+	} else if (early_machine_is_msm8937()) {
+		dummy_socinfo.id = 294;
+		strlcpy(dummy_socinfo.build_id, "msm8937 - ",
 			sizeof(dummy_socinfo.build_id));
 	}
 

@@ -11,32 +11,23 @@
  * GNU General Public License for more details.
  */
 
-&soc {
-	qcom,ion {
-		compatible = "qcom,msm-ion";
-		#address-cells = <1>;
-		#size-cells = <0>;
+#include <linux/kernel.h>
+#include <asm/mach/arch.h>
+#include "board-dt.h"
 
-		qcom,ion-heap@25 {
-			reg = <25>;
-			qcom,ion-heap-type = "SYSTEM";
-		};
-
-		qcom,ion-heap@21 {
-			reg = <21>;
-			qcom,ion-heap-type = "SYSTEM_CONTIG";
-		};
-
-		qcom,ion-heap@8 { /* CP_MM HEAP */
-			reg = <8>;
-			memory-region = <&secure_mem>;
-			qcom,ion-heap-type = "SECURE_DMA";
-		};
-
-		qcom,ion-heap@27 { /* QSEECOM HEAP */
-			reg = <27>;
-			memory-region = <&qseecom_mem>;
-			qcom,ion-heap-type = "DMA";
-		};
-	};
+static const char *msm8937_dt_match[] __initconst = {
+	"qcom,msm8937",
+	"qcom,apq8937",
+	NULL
 };
+
+static void __init msm8937_init(void)
+{
+	board_dt_populate(NULL);
+}
+
+DT_MACHINE_START(MSM8937_DT,
+	"Qualcomm Technologies, Inc. MSM8937 (Flattened Device Tree)")
+	.init_machine = msm8937_init,
+	.dt_compat = msm8937_dt_match,
+MACHINE_END

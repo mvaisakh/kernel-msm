@@ -218,10 +218,9 @@ config SND_SOC_MSM8996
 	 the machine driver and the corresponding
 	 DAI-links
 
-config SND_SOC_MSM8998
-	tristate "SoC Machine driver for MSM8998 boards"
-	depends on ARCH_QCOM
-	select SND_SOC_COMPRESS
+config SND_SOC_MSM8X16
+	tristate "SoC Machine driver for MSM8916"
+	depends on ARCH_MSMTITANIUM || ARCH_MSM8916 || ARCH_MSM8937
 	select SND_SOC_QDSP6V2
 	select SND_SOC_MSM_STUB
 	select SND_SOC_MSM_HOSTLESS_PCM

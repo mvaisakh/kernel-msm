@@ -120,12 +120,13 @@ config PINCTRL_MSM8917
 	  This is the pinctrl, pinmux, pinconf and gpiolib driver for the
 	  QTI TLMM block found in the QTI MSM8917 platform.
 
-config PINCTRL_WCD
-	tristate "Qualcomm Technologies, Inc WCD pin controller driver"
-	depends on WCD934X_CODEC
+config PINCTRL_MSM8937
+	tristate "QTI MSM8937 pin controller driver"
+	depends on GPIOLIB && OF && (ARCH_MSM8937 || COMPILE_TEST)
+	select PINCTRL_MSM
 	help
 	  This is the pinctrl, pinmux, pinconf and gpiolib driver for the
-	  WCD gpio controller block.
+	  QTI TLMM block found in the QTI MSM8937 platform.
 
 config PINCTRL_LPI
 	tristate "Qualcomm Technologies, Inc LPI pin controller driver"
