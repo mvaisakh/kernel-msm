@@ -59,3 +59,7 @@ obj-$(CONFIG_MTK_THERMAL)	+= mtk_thermal.o
 obj-$(CONFIG_GENERIC_ADC_THERMAL)	+= thermal-generic-adc.o
 obj-$(CONFIG_THERMAL_QPNP_ADC_TM)	+= qpnp-adc-tm.o
 obj-$(CONFIG_THERMAL_TSENS)	+= msm-tsens.o tsens2xxx.o tsens-dbg.o tsens-mtc.o tsens1xxx.o tsens_calib.o
+obj-$(CONFIG_THERMAL_MONITOR)	+= msm_thermal.o msm_thermal-dev.o
+obj-$(CONFIG_LIMITS_MONITOR)	+= lmh_interface.o
+obj-$(CONFIG_LIMITS_LITE_HW)	+= lmh_lite.o
+obj-$(CONFIG_MMI_SYS_TEMP)      += mmi_sys_temp.o
