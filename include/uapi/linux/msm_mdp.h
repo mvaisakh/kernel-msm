@@ -116,12 +116,8 @@
 #define MDSS_MDP_HW_REV_200	MDSS_MDP_REV(2, 0, 0) /* 8092 v1.0 */
 #define MDSS_MDP_HW_REV_112	MDSS_MDP_REV(1, 12, 0) /* 8952 v1.0 */
 #define MDSS_MDP_HW_REV_114	MDSS_MDP_REV(1, 14, 0) /* 8937 v1.0 */
-#define MDSS_MDP_HW_REV_115	MDSS_MDP_REV(1, 15, 0) /* msmgold */
-#define MDSS_MDP_HW_REV_116	MDSS_MDP_REV(1, 16, 0) /* msmtitanium */
-#define MDSS_MDP_HW_REV_300	MDSS_MDP_REV(3, 0, 0)  /* msm8998 */
-#define MDSS_MDP_HW_REV_301	MDSS_MDP_REV(3, 0, 1)  /* msm8998 v1.0 */
-#define MDSS_MDP_HW_REV_320	MDSS_MDP_REV(3, 2, 0)  /* sdm660 */
-#define MDSS_MDP_HW_REV_330	MDSS_MDP_REV(3, 3, 0)  /* sdm630 */
+#define MDSS_MDP_HW_REV_115	MDSS_MDP_REV(1, 15, 0) /* msm8917 */
+#define MDSS_MDP_HW_REV_116	MDSS_MDP_REV(1, 16, 0) /* msm8953 */
 
 enum {
 	NOTIFY_UPDATE_INIT,

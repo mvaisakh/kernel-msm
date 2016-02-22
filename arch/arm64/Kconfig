@@ -251,7 +251,107 @@ source "init/Kconfig"
 
 source "kernel/Kconfig.freezer"
 
-source "arch/arm64/Kconfig.platforms"
+menu "Platform selection"
+
+config ARCH_THUNDER
+	bool "Cavium Inc. Thunder SoC Family"
+	help
+	  This enables support for Cavium's Thunder Family of SoCs.
+
+config ARCH_VEXPRESS
+	bool "ARMv8 software model (Versatile Express)"
+	select ARCH_REQUIRE_GPIOLIB
+	select COMMON_CLK_VERSATILE
+	select POWER_RESET_VEXPRESS
+	select VEXPRESS_CONFIG
+	help
+	  This enables support for the ARMv8 software model (Versatile
+	  Express).
+
+config ARCH_XGENE
+	bool "AppliedMicro X-Gene SOC Family"
+	help
+	  This enables support for AppliedMicro X-Gene SOC Family
+
+config ARCH_MSM
+	bool "Qualcomm Platforms"
+	select ARCH_REQUIRE_GPIOLIB
+	select CLKDEV_LOOKUP
+	select HAVE_CLK
+	select HAVE_CLK_PREPARE
+	select MSM_IRQ
+	select PINCTRL
+	select SOC_BUS
+	select PM_OPP
+	select PCI
+	select PM_DEVFREQ
+	select MSM_DEVFREQ_DEVBW
+	select MSM_BIMC_BWMON
+	select MSMCCI_HWMON
+	select MSM_M4M_HWMON
+	select DEVFREQ_GOV_MSM_BW_HWMON
+	select DEVFREQ_GOV_MSM_CACHE_HWMON
+	select DEVFREQ_SIMPLE_DEV
+	select ARCH_HAS_OPP
+	select THERMAL_WRITABLE_TRIPS
+	select CPU_FREQ_MSM
+	select ARM_MEMLAT_MON
+	select DEVFREQ_GOV_MEMLAT
+	help
+	  This enables support for the ARMv8 based Qualcomm chipsets.
+
+config ARCH_MSM8916
+	bool "Enable Support for Qualcomm MSM8916"
+	depends on ARCH_MSM
+	help
+	  This enables support for the MSM8916 chipset. If you don't
+	  know what to do here, say N
+
+config ARCH_MSM8917
+	bool "Enable Support for Qualcomm Technologies Inc MSM8917"
+	depends on ARCH_MSM
+	help
+	  This enables support for the MSM8917 chipset. If you don't
+	  know what to do here, say N
+
+config ARCH_MSM8953
+	bool "Enable Support for Qualcomm Technologies Inc MSM8953"
+	depends on ARCH_MSM
+	help
+	  This enables support for the MSM8953 chipset. If you don't
+	  know what to do here, say N
+
+config ARCH_MSM8937
+	bool "Enable Support for Qualcomm Technologies Inc MSM8937"
+	depends on ARCH_MSM
+	help
+	  This enables support for the MSM8937 chipset. If you don't
+	  know what to do here, say N
+
+config ARCH_MSM8996
+	bool "Enable Support for Qualcomm MSM8996"
+	depends on ARCH_MSM
+	help
+	  This enables support for the MSM8996 chipset. If you don't
+	  know what to do here, say N
+
+config ARCH_MSMCOBALT
+	bool "Enable Support for Qualcomm MSMCOBALT"
+	depends on ARCH_MSM
+	help
+	  This enables support for the MSMCOBALT chipset. If you do not
+	  wish to build a kernel that runs on this chipset, say 'N' here.
+
+config ARCH_MSM8994_V1_TLBI_WA
+	bool "Enable MSM8994 v1 TLBI workaround"
+	depends on ARCH_MSM8994
+	help
+	  This enables support for the MSM8994 v1 TLBI workaround. This
+	  workaround is required for MSM8994 V1 revision where the
+	  [39:38] bits of VA are tied to zero and due to which TLBI
+	  operations with VA or ASID will not work.
+
+endmenu
 
 menu "Bus support"
 
