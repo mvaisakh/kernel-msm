@@ -11,10 +11,14 @@
  * GNU General Public License for more details.
  */
 
-#include "msm-pmi8937.dtsi"
-#include "msm8917-qrd.dtsi"
+/dts-v1/;
 
-&soc {
-	led_flash0: qcom,camera-flash {
-	};
+#include "msm8917.dtsi"
+#include "msm8917-qgp-tmo.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. MSM8917-PMI8937 QGP TMO";
+	compatible = "qcom,msm8917-qgp-tmo", "qcom,msm8917-qrd",
+		   "qcom,msm8917", "qcom,qrd";
+	qcom,board-id= <0x1000b 0x0a>;
 };
