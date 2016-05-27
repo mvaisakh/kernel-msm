@@ -1,6 +1,4 @@
-/*
- * Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
- * Copyright (c) 2014,2015, Linaro Ltd.
+/* Copyright (c) 2011-2016, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -161,11 +159,11 @@ static void spm_set_low_power_mode(struct spm_driver_data *drv,
 
 	start_index = drv->reg_data->start_index[mode];
 
-	ctl_val = spm_register_read(drv, SPM_REG_SPM_CTL);
-	ctl_val &= ~(SPM_CTL_INDEX << SPM_CTL_INDEX_SHIFT);
-	ctl_val |= start_index << SPM_CTL_INDEX_SHIFT;
-	ctl_val |= SPM_CTL_EN;
-	spm_register_write_sync(drv, SPM_REG_SPM_CTL, ctl_val);
+uint32_t msm_spm_drv_get_sts_curr_pmic_data(
+		struct msm_spm_driver_data *dev)
+{
+	msm_spm_drv_load_shadow(dev, MSM_SPM_REG_SAW_PMIC_STS);
+	return dev->reg_shadow[MSM_SPM_REG_SAW_PMIC_STS] & 0x300FF;
 }
 
 static int qcom_pm_collapse(unsigned long int unused)
@@ -333,10 +331,53 @@ static int spm_dev_probe(struct platform_device *pdev)
 	if (!drv)
 		return -EINVAL;
 
-	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
-	drv->reg_base = devm_ioremap_resource(&pdev->dev, res);
-	if (IS_ERR(drv->reg_base))
-		return PTR_ERR(drv->reg_base);
+	avs_enabled  = msm_spm_drv_is_avs_enabled(dev);
+
+	if (!msm_spm_pmic_arb_present(dev))
+		return -ENOSYS;
+
+	if (msm_spm_debug_mask & MSM_SPM_DEBUG_VCTL)
+		pr_info("%s: requesting vlevel %#x\n", __func__, vlevel);
+
+	if (avs_enabled)
+		msm_spm_drv_disable_avs(dev);
+
+	/* Kick the state machine back to idle */
+	dev->reg_shadow[MSM_SPM_REG_SAW_RST] = 1;
+	msm_spm_drv_flush_shadow(dev, MSM_SPM_REG_SAW_RST);
+
+	msm_spm_drv_set_vctl2(dev, vlevel);
+
+	timeout_us = dev->vctl_timeout_us;
+	/* Confirm the voltage we set was what hardware sent */
+	do {
+		udelay(1);
+		new_level = msm_spm_drv_get_sts_curr_pmic_data(dev);
+		/* FSM is idle */
+		if (((new_level & 0x30000) == 0) &&
+				((new_level & 0xFF) == vlevel))
+			break;
+	} while (--timeout_us);
+	if (!timeout_us) {
+		pr_info("Wrong level %#x\n", new_level);
+		goto set_vdd_bail;
+	}
+
+	if (msm_spm_debug_mask & MSM_SPM_DEBUG_VCTL)
+		pr_info("%s: done, remaining timeout %u us\n",
+			__func__, timeout_us);
+
+	/* Set AVS min/max */
+	if (avs_enabled) {
+		msm_spm_drv_set_avs_vlevel(dev, vlevel);
+		msm_spm_drv_enable_avs(dev);
+	}
+
+	return 0;
+
+set_vdd_bail:
+	if (avs_enabled)
+		msm_spm_drv_enable_avs(dev);
 
 	match_id = of_match_node(spm_match_table, pdev->dev.of_node);
 	if (!match_id)
