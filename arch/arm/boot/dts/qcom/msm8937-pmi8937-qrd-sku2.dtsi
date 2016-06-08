@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2015-2016, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -12,32 +12,39 @@
  */
 
 #include "msm-pmi8937.dtsi"
-#include "msm8917-qrd.dtsi"
+#include "msm8937-qrd.dtsi"
 #include "msm8937-mdss-panels.dtsi"
 
-&mdss_mdp {
-	qcom,mdss-pref-prim-intf = "dsi";
-};
-
-&mdss_dsi {
-	hw-config = "single_dsi";
-};
-
-&mdss_dsi0 {
-	qcom,dsi-pref-prim-pan = <&dsi_hx8394f_720p_video>;
-	pinctrl-names = "mdss_default", "mdss_sleep";
-	pinctrl-0 = <&mdss_dsi_active>;
-	pinctrl-1 = <&mdss_dsi_suspend>;
-
-	qcom,platform-reset-gpio = <&tlmm 60 0>;
-};
-
-&dsi_hx8394f_720p_video {
-	qcom,esd-check-enabled;
-	qcom,panel-supply-entries = <&dsi_panel_pwr_supply>;
+&spmi_bus {
+	qcom,pmi8937@2 {
+		qcom,leds@a100 {
+			status = "okay";
+			qcom,led_mpp_2 {
+				label = "mpp";
+				linux,name = "green";
+				linux,default-trigger = "none";
+				qcom,default-state = "off";
+				qcom,max-current = <40>;
+				qcom,current-setting = <5>;
+				qcom,id = <6>;
+				qcom,mode = "manual";
+				qcom,source-sel = <1>;
+				qcom,mode-ctrl = <0x60>;
+			};
+		};
+	};
 };
 
 &soc {
+	led_flash0: qcom,camera-flash {
+		cell-index = <0>;
+		compatible = "qcom,camera-flash";
+		qcom,flash-type = <1>;
+		qcom,flash-source = <&pmi8937_flash0>;
+		qcom,torch-source = <&pmi8937_torch0>;
+		qcom,switch-source = <&pmi8937_switch>;
+	};
+
 	i2c@78b7000 {
 		status = "ok";
 		focaltech@38 {
@@ -45,8 +52,8 @@
 			reg = <0x38>;
 			interrupt-parent = <&tlmm>;
 			interrupts = <65 0x2>;
-			vdd-supply = <&pm8917_l10>;
-			vcc_i2c-supply = <&pm8917_l5>;
+			vdd-supply = <&pm8937_l10>;
+			vcc_i2c-supply = <&pm8937_l5>;
 			/* pins used by touchscreen */
 			pinctrl-names = "pmx_ts_active",
 						"pmx_ts_suspend",
@@ -75,6 +82,10 @@
 			focaltech,fw-delay-era-flsh-ms = <2000>;
 			focaltech,fw-auto-cal;
 			focaltech,ignore-id-check;
+			/* Underlying clocks used by secure touch */
+			clock-names = "iface_clk", "core_clk";
+			clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
+				<&clock_gcc clk_gcc_blsp1_qup3_i2c_apps_clk>;
 		};
 	};
 
@@ -90,24 +101,22 @@
 	};
 };
 
-&spmi_bus {
-	qcom,pmi8937@2 {
-		qcom,leds@a100 {
-			status = "okay";
-			qcom,led_mpp_2 {
-				label = "mpp";
-				linux,name = "green";
-				linux,default-trigger = "none";
-				qcom,default-state = "off";
-				qcom,max-current = <40>;
-				qcom,current-setting = <5>;
-				qcom,id = <6>;
-				qcom,mode = "manual";
-				qcom,source-sel = <1>;
-				qcom,mode-ctrl = <0x60>;
-			};
-		};
-	};
+&mdss_mdp {
+	qcom,mdss-pref-prim-intf = "dsi";
+};
+
+&mdss_dsi {
+	hw-config = "single_dsi";
+};
+
+&mdss_dsi0 {
+	qcom,dsi-pref-prim-pan = <&dsi_hx8394f_720p_video>;
+	pinctrl-names = "mdss_default", "mdss_sleep";
+	pinctrl-0 = <&mdss_dsi_active &mdss_te_active>;
+	pinctrl-1 = <&mdss_dsi_suspend &mdss_te_suspend>;
+
+	qcom,platform-te-gpio = <&tlmm 24 0>;
+	qcom,platform-reset-gpio = <&tlmm 60 0>;
 };
 
 &pmi_haptic {
@@ -120,19 +129,24 @@
 	/delete-property/ qcom,misc-trim-error-rc19p2-clk-reg-present;
 };
 
-&flash_led {
-	/delete-node/ qcom,flash_1;
-	/delete-node/ qcom,torch_1;
+&mdss_dsi1 {
+	status = "disabled";
 };
 
-&soc {
-	led_flash0: qcom,camera-flash {
-		cell-index = <0>;
-		compatible = "qcom,camera-flash";
-		qcom,flash-type = <1>;
-		qcom,flash-source = <&pmi8937_flash0>;
-		qcom,torch-source = <&pmi8937_torch0>;
-		qcom,switch-source = <&pmi8937_switch>;
+&dsi_hx8394f_720p_video {
+	qcom,esd-check-enabled;
+	qcom,panel-supply-entries = <&dsi_panel_pwr_supply>;
+};
+
+&sdc2_cmd_on {
+	config {
+		drive-strength = <12>;
+	};
+};
+
+&sdc2_data_on {
+	config {
+		drive-strength = <12>;
 	};
 };
 
@@ -159,4 +173,9 @@
 	qcom,warm-bat-decidegc = <550>;
 	qcom,bad-battery-detection-enable;
 	qcom,hold-soc-while-full;
+};
+
+&flash_led {
+	/delete-node/ qcom,flash_1;
+	/delete-node/ qcom,torch_1;
 };
