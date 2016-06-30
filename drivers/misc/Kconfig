@@ -824,6 +824,14 @@ config QPNP_MISC
 	  and the driver provides an API to check if this interrupt
 	  is available on the current PMIC chip.
 
+config HAPTIC_DRV2624
+	tristate "TI DRV2624 haptic driver"
+	depends on I2C && SYSFS
+	help
+	  Ultra Low Power Closed-Loop LRA/ERM Haptic Driver with Internal Memory
+	  If you say yes here you get support for the TI DRV2624
+	  haptic driver.
+
 source "drivers/misc/c2port/Kconfig"
 source "drivers/misc/eeprom/Kconfig"
 source "drivers/misc/cb710/Kconfig"
