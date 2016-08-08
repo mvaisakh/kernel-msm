@@ -11,14 +11,22 @@
  * GNU General Public License for more details.
  */
 
-#include "skeleton64.dtsi"
-#include "msm8917.dtsi"
+#include <linux/kernel.h>
+#include <asm/mach/arch.h>
+#include "board-dt.h"
 
-/ {
-	model = "Qualcomm Technologies, Inc. MSM8920";
-	compatible = "qcom,msm8920";
-	qcom,msm-id = <320 0x0>;
-	interrupt-parent = <&intc>;
-
-	soc: soc { };
+static const char *msm8920_dt_match[] __initconst = {
+	"qcom,msm8920",
+	NULL
 };
+
+static void __init msm8920_init(void)
+{
+	board_dt_populate(NULL);
+}
+
+DT_MACHINE_START(MSM8920_DT,
+	"Qualcomm Technologies, Inc. MSM 8920 (Flattened Device Tree)")
+	.init_machine = msm8920_init,
+	.dt_compat = msm8920_dt_match,
+MACHINE_END

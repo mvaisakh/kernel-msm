@@ -11,14 +11,14 @@
  * GNU General Public License for more details.
  */
 
-#include "skeleton64.dtsi"
-#include "msm8917.dtsi"
+/dts-v1/;
+
+#include "msm8920.dtsi"
+#include "msm8917-pmi8950-mtp.dtsi"
 
 / {
-	model = "Qualcomm Technologies, Inc. MSM8920";
-	compatible = "qcom,msm8920";
-	qcom,msm-id = <320 0x0>;
-	interrupt-parent = <&intc>;
-
-	soc: soc { };
+	model = "Qualcomm Technologies, Inc. MSM8920-PMI8950 MTP";
+	compatible = "qcom,msm8920-mtp", "qcom,msm8920", "qcom,mtp";
+	qcom,board-id= <8 0>;
+	qcom,pmic-id = <0x10019 0x010011 0x0 0x0>;
 };
