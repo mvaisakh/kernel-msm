@@ -4,11 +4,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= msm8996-mtp.dtb
 dtb-$(CONFIG_ARCH_QCOM)	+= apq8096-db820c.dtb
 endif
 
-dtb-$(CONFIG_ARCH_MSM8937) += msm8937-cedric-p1.dtb \
-	msm8937-cedric-p2.dtb \
-	msm8937-cedric-p3.dtb \
-	msm8937-cedric-p4.dtb \
-	msm8937-cedric-p5.dtb
+dtb-$(CONFIG_ARCH_MSM8937) += msm8937-cedric-p1.dtb
 
 ifeq ($(CONFIG_MMI_DEVICE_DTBS),y)
 # Add 1k of padding to the DTBs to allow for environment variables
