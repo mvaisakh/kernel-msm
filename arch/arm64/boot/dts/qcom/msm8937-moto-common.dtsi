@@ -13,3 +13,9 @@
 
 #include "msm8937-pinctrl.dtsi"
 #include "msm8937-moto-pinctrl.dtsi"
+
+&soc {
+	i2c7 {
+		status = "ok";
+	};
+};
