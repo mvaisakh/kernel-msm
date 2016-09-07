@@ -689,6 +689,8 @@ int mdss_dsi_panel_power_ctrl(struct mdss_panel_data *pdata, int power_state);
 void mdss_dsi_ctrl_phy_reset(struct mdss_dsi_ctrl_pdata *ctrl);
 
 void mdss_dsi_debug_bus_init(struct mdss_dsi_data *sdata);
+int mdss_dsi_panel_ioctl_handler(struct mdss_panel_data *pdata,
+					u32 cmd, void *arg);
 
 static inline const char *__mdss_dsi_pm_name(enum dsi_pm_type module)
 {
