@@ -737,6 +737,22 @@ config MSM_PM
 	  determines last CPU to call into PSCI for cluster Low power
 	  modes.
 
+config ALBUS_DTB
+	depends on ARCH_MSM
+	default n
+	bool "Albus DTBs"
+	help
+	  Only include Albus specific DTBs to limit the number that
+	  get built during kernel compilation.
+
+config CEDRIC_DTB
+	depends on ARCH_MSM
+	default n
+	bool "Cedric DTBs"
+	help
+	  Only include Cedric specific DTBs to limit the number that
+	  get built during kernel compilation.
+
 config MSM_PM_LEGACY
 	depends on PM
 	select MSM_IDLE_STATS if DEBUG_FS

@@ -167,6 +167,139 @@ endif
 
 targets += dtbs
 
+dtb-$(CONFIG_ARCH_MDM9640) += mdm9640-sim.dtb \
+	mdm9640-rumi.dtb \
+	mdm9640-emmc-cdp.dtb \
+	mdm9640-nand-cdp.dtb \
+	mdm9640-mtp.dtb \
+	mdm9640-v1-mtp.dtb \
+	mdm9640-v1-pmk8001-mtp.dtb \
+	mdm9640-v2-mtp.dtb \
+	mdm9640-v2-pmk8001-mtp.dtb \
+
+
+dtb-$(CONFIG_ARCH_MDMCALIFORNIUM) += mdmcalifornium-sim.dtb \
+	mdmcalifornium-rumi.dtb \
+	mdmcalifornium-emmc-cdp.dtb \
+	mdmcalifornium-nand-cdp.dtb \
+	mdmcalifornium-emmc-mtp.dtb \
+	mdmcalifornium-nand-mtp.dtb \
+	mdmcalifornium-nand-dualwifi-mtp.dtb \
+	mdmcalifornium-v1.1-emmc-cdp.dtb \
+	mdmcalifornium-v1.1-nand-cdp.dtb \
+	mdmcalifornium-v1.1-emmc-mtp.dtb \
+	mdmcalifornium-v1.1-nand-mtp.dtb \
+	mdmcalifornium-v1.1-nand-dualwifi-mtp.dtb
+
+# Do not include QC default DTBs if not needed
+ifeq($(CONFIG_MMI_DEVICE_DTBS),y)
+dtb-$(CONFIG_ARCH_MSM8937) += msm8937-rumi.dtb \
+	msm8937-pmi8950-cdp.dtb \
+	msm8937-pmi8937-cdp.dtb \
+	msm8937-pmi8950-ext-codec-cdp.dtb \
+	msm8937-pmi8950-mtp.dtb \
+	msm8937-pmi8937-mtp.dtb \
+	msm8937-pmi8950-rcm.dtb \
+	msm8937-pmi8937-rcm.dtb \
+	msm8937-pmi8950-qrd-sku1.dtb \
+	msm8937-pmi8937-qrd-sku2.dtb \
+	msm8937-pmi8950-qrd-sku1-dvt1.dtb \
+	msm8937-pmi8937-qrd-sku2-dvt1.dtb \
+	apq8037-pmi8950-cdp.dtb \
+	apq8037-pmi8937-cdp.dtb \
+	apq8037-pmi8950-mtp.dtb \
+	apq8037-pmi8937-mtp.dtb
+
+dtb-$(CONFIG_ARCH_MSM8917) += msm8917-rumi.dtb \
+	apq8017-pmi8937-cdp.dtb \
+	apq8017-pmi8937-mtp.dtb \
+	apq8017-pmi8950-cdp.dtb \
+	apq8017-pmi8950-mtp.dtb \
+	msm8917-pmi8937-cdp.dtb \
+	msm8917-pmi8937-mtp.dtb \
+	msm8917-pmi8950-cdp.dtb \
+	msm8917-pmi8950-ext-codec-cdp.dtb \
+	msm8917-pmi8950-mtp.dtb \
+	msm8917-pmi8937-rcm.dtb \
+	msm8917-pmi8950-rcm.dtb \
+	msm8917-qgp-tmo.dtb \
+	msm8917-pmi8937-qrd-sku5.dtb
+
+dtb-$(CONFIG_ARCH_MSM8920) += msm8920-pmi8937-cdp.dtb \
+	msm8920-pmi8937-mtp.dtb \
+	msm8920-pmi8950-cdp.dtb \
+	msm8920-pmi8950-mtp.dtb \
+	msm8920-pmi8937-rcm.dtb \
+	msm8920-pmi8950-rcm.dtb \
+	msm8920-pmi8940-qrd-sku7.dtb
+
+dtb-$(CONFIG_ARCH_MSM8940) += msm8940-pmi8937-cdp.dtb \
+	msm8940-pmi8937-mtp.dtb \
+	msm8940-pmi8950-cdp.dtb \
+	msm8940-pmi8950-mtp.dtb \
+	msm8940-pmi8937-rcm.dtb \
+	msm8940-pmi8950-rcm.dtb \
+	msm8940-pmi8950-qrd-sku6.dtb \
+	msm8940-pmi8950-qrd-sku7.dtb \
+	msm8940-pmi8950-ext-codec-cdp.dtb \
+	msm8940-pmi8940-mtp.dtb \
+	msm8940-pmi8940-cdp.dtb \
+	msm8940-pmi8940-rcm.dtb \
+	msm8940-pmi8940-qrd-sku7.dtb
+
+dtb-$(CONFIG_ARCH_MSM8953) += msm8953-sim.dtb \
+	msm8953-rumi.dtb \
+	msm8953-cdp.dtb \
+	msm8953-mtp.dtb \
+	msm8953-ext-codec-mtp.dtb \
+	msm8953-qrd-sku3.dtb \
+	msm8953-rcm.dtb \
+	msm8953-ext-codec-rcm.dtb \
+	apq8053-cdp.dtb \
+	apq8053-mtp.dtb \
+	apq8053-ext-audio-mtp.dtb \
+	msm8953-cdp-1200p.dtb \
+	msm8953-iot-mtp.dtb \
+	apq8053-iot-mtp.dtb
+endif # CONFIG_MMI_DEVICE_DTBS
+
+ifeq ($(CONFIG_ADDISON_DTB),y)
+dtb-$(CONFIG_ARCH_MSM8953) += msm8953-addison-p1.dtb \
+	msm8953-addison-p2a.dtb \
+	msm8953-addison-p3.dtb \
+	msm8953-addison-p4.dtb \
+	msm8953-addison-p7.dtb
+endif
+
+ifeq ($(CONFIG_POTTER_DTB),y)
+dtb-$(CONFIG_ARCH_MSM8953) += msm8953-potter-p0a.dtb \
+	msm8953-potter-p1a.dtb \
+	msm8953-potter-p1b.dtb
+endif
+
+ifeq ($(CONFIG_ALBUS_DTB),y)
+dtb-$(CONFIG_ARCH_MSM8953) += msm8953-albus-p0.dtb
+endif
+
+ifeq ($(CONFIG_CEDRIC_DTB),y)
+dtb-$(CONFIG_ARCH_MSM8937) += msm8937-cedric-p1.dtb \
+	msm8937-cedric-p2.dtb
+endif
+
+dtb-$(CONFIG_ARCH_MDM9607) += mdm9607-rumi.dtb \
+	mdm9607-cdp.dtb \
+	mdm9607-mtp.dtb \
+	mdm9607-rcm.dtb \
+	mdm9607-mtp-sdcard.dtb
+
+# Do not include QC default DTBs if not needed
+ifneq ($(CONFIG_MMI_DEVICE_DTBS),y)
+dtb-$(CONFIG_ARCH_MSM8916) += msm8952-qrd-skum.dtb \
+       msm8952-cdp.dtb \
+       msm8952-ext-codec-cdp.dtb \
+       msm8952-mtp.dtb
+endif # CONFIG_MMI_DEVICE_DTBS
+
 include $(srctree)/arch/arm64/boot/dts/qcom/Makefile
 $(obj)/%.dtb: $(src)/../../../../arm64/boot/dts/qcom/%.dts FORCE
 	$(call if_changed_dep,dtc)
