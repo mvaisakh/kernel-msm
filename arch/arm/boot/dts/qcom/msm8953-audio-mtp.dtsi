@@ -13,21 +13,15 @@
 
 &int_codec {
 	status = "okay";
-	qcom,msm-hs-micbias-type = "external";
-
-	asoc-wsa-codec-names = "wsa881x-i2c-codec.2-000f";
-	asoc-wsa-codec-prefixes = "SpkrMono";
-
-	msm-vdd-wsa-switch-supply = <&pm8937_l13>;
-	qcom,msm-vdd-wsa-switch-voltage = <3075000>;
-	qcom,msm-vdd-wsa-switch-current = <5000>;
+	qcom,model = "msm8953-snd-card-mtp";
+	qcom,msm-hs-micbias-type = "internal";
 };
 
-&pm8937_cajon_dig {
+&pm8953_diangu_dig {
 	status = "okay";
 };
 
-&pm8937_cajon_analog {
+&pm8953_diangu_analog {
 	status = "okay";
 };
 
