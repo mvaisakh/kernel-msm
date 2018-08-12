@@ -290,6 +290,7 @@ dtb-$(CONFIG_ARCH_MSM8953) += msm8953-sim.dtb \
 	msm8953-pmi8937-ext-codec-mtp.dtb
 endif # CONFIG_MMI_DEVICE_DTBS
 
+
 dtb-$(CONFIG_ARCH_SDM450) += sdm450-rcm.dtb \
 	sdm450-cdp.dtb \
 	sdm450-mtp.dtb \
@@ -378,7 +379,7 @@ dtb-$(CONFIG_ARCH_SDM630) += sdm630-rumi.dtb \
 	sdm630-headset-jacktype-no-rcm.dtb \
 	sdm630-pm660a-headset-jacktype-no-cdp.dtb \
 	sdm630-pm660a-headset-jacktype-no-rcm.dtb
-endif # CONFIG_MMI_DEVICE_DTBS
+
 
 ifeq ($(CONFIG_ARM64),y)
 always          := $(dtb-y)
