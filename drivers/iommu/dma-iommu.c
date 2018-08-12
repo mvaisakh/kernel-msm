@@ -514,8 +514,9 @@ void iommu_dma_unmap_sg(struct device *dev, struct scatterlist *sg, int nents,
 	__iommu_dma_unmap(iommu_get_domain_for_dev(dev), sg_dma_address(sg));
 }
 
-int iommu_dma_supported(struct device *dev, u64 mask)
+extern int iommu_dma_supp(struct device *dev, u64 mask)
 {
+
 	/*
 	 * 'Special' IOMMUs which don't have the same addressing capability
 	 * as the CPU will have to wait until we have some way to query that

@@ -61,7 +61,7 @@ obj-$(CONFIG_BRCMSMAC)	+= brcm80211/
 obj-$(CONFIG_CW1200)	+= cw1200/
 obj-$(CONFIG_RSI_91X)	+= rsi/
 
-obj-$(CONFIG_WCNSS_CORE)	+= wcnss/
+#obj-$(CONFIG_WCNSS_CORE)	+= wcnss/
 
 obj-$(CONFIG_CNSS)	+= cnss/
 obj-$(CONFIG_CNSS2)	+= cnss2/

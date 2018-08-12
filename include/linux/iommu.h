@@ -397,7 +397,7 @@ static inline size_t iommu_map_sg(struct iommu_domain *domain,
 	return ret;
 }
 
-extern int iommu_dma_supported(struct iommu_domain *domain, struct device *dev,
+int iommu_dma_support(struct iommu_domain *domain, struct device *dev,
 			       u64 mask);
 
 /* PCI device grouping function */

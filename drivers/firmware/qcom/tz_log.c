@@ -1383,7 +1383,7 @@ static int tz_log_probe(struct platform_device *pdev)
 
 	tzdbg_register_qsee_log_buf();
 
-	tzdbg_get_tz_version();
+	//tzdbg_get_tz_version();
 
 	tzlog_bck_check(pdev);
 	return 0;

@@ -75,6 +75,8 @@ enum scm_arg_types {
 
 #define SCM_ARGS(...) SCM_ARGS_IMPL(__VA_ARGS__, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
+typedef unsigned long long  u64;
+
 /**
  * struct scm_desc
  * @arginfo: Metadata describing the arguments in args[]
