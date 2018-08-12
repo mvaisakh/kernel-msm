@@ -1,4 +1,5 @@
 sudo: enabled
+language: C
 before_install:
   - git clone -b master https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/ /home/travis/toolchain
   - git clone https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/ -b master /home/travis/clang
