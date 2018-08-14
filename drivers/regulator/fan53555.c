@@ -310,6 +310,11 @@ static const struct regmap_config fan53555_regmap_config = {
 	.val_bits = 8,
 };
 
+extern struct regulator_init_data
+	*of_get_regulator_init_data(struct device *dev,
+				    struct device_node *node,
+				    const struct regulator_desc *desc);
+
 static int fan53555_parse_dt(struct fan53555_device_info *di,
 				struct fan53555_platform_data *pdata,
 				const struct regulator_desc *desc)

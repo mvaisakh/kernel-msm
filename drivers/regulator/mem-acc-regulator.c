@@ -1286,6 +1286,10 @@ static int mem_acc_init(struct platform_device *pdev,
 
 	return 0;
 }
+extern struct regulator_init_data
+	*of_get_regulator_init_data(struct device *dev,
+				    struct device_node *node,
+				    const struct regulator_desc *desc);
 
 static int mem_acc_regulator_probe(struct platform_device *pdev)
 {

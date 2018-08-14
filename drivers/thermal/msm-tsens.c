@@ -50,6 +50,7 @@
 #define TSENS_SN_STATUS_LOWER_STATUS	BIT(11)
 #define TSENS_SN_STATUS_UPPER_STATUS	BIT(12)
 #define TSENS_STATUS_ADDR_OFFSET			2
+#define TSENS_CONTR_14_TSENS_CAL_SEL     0x00000007
 
 #define TSENS_TRDY_ADDR(n)		((n) + 0x105c)
 #define TSENS_TRDY_MASK			BIT(0)
@@ -176,6 +177,39 @@
 #define TSENS_DEBUG_BUS_ID2_MAX_CYCLE	51
 #define TSENS_DEBUG_ID_MASK_1_4		0xffffffe1
 
+// These were undeclared
+#define TSENS_ONE_POINT_CALIB_OPTION_2	0x2
+#define TSENS_TWO_POINT_CALIB		0x3
+#define TSENS_CONTR_14_BASE0_MASK                0x000000ff
+#define TSENS_CONTR_14_BASE1_MASK                0xff000000
+#define TSENS_TWO_POINT_CALIB_N_WA			0x6
+#define TSENS_TWO_POINT_CALIB_N_OFFSET_WA		0x7
+#define TSENS0_CONTR_14_POINT1_MASK              0x000001f8
+#define TSENS1_CONTR_14_POINT1_MASK              0x001f8000
+#define TSENS2_CONTR_14_POINT1_MASK_0_4          0xf8000000
+#define TSENS2_CONTR_14_POINT1_MASK_5            0x00000001
+#define TSENS3_CONTR_14_POINT1_MASK              0x00001f80
+#define TSENS4_CONTR_14_POINT1_MASK              0x01f80000
+#define TSENS5_CONTR_14_POINT1_MASK              0x00003f00
+#define TSENS6_CONTR_14_POINT1_MASK              0x03f00000
+#define TSENS7_CONTR_14_POINT1_MASK              0x0000003f
+#define TSENS8_CONTR_14_POINT1_MASK              0x0003f000
+#define TSENS9_CONTR_14_POINT1_MASK              0x0000003f
+#define TSENS10_CONTR_14_POINT1_MASK             0x0003f000
+#define TSENS0_CONTR_14_POINT2_MASK              0x00007e00
+#define TSENS1_CONTR_14_POINT2_MASK              0x07e00000
+#define TSENS2_CONTR_14_POINT2_MASK              0x0000007e
+#define TSENS3_CONTR_14_POINT2_MASK              0x0007e000
+#define TSENS4_CONTR_14_POINT2_MASK              0x7e000000
+#define TSENS5_CONTR_14_POINT2_MASK              0x000fc000
+#define TSENS6_CONTR_14_POINT2_MASK              0xfc000000
+#define TSENS7_CONTR_14_POINT2_MASK              0x00000fc0
+#define TSENS8_CONTR_14_POINT2_MASK              0x00fc0000
+#define TSENS9_CONTR_14_POINT2_MASK              0x00000fc0
+#define TSENS10_CONTR_14_POINT2_MASK             0x00fc0000
+#define TSENS_NO_CALIB_POINT1_DATA 		 500
+#define TSENS_NO_CALIB_POINT2_DATA 		 780
+
 static uint32_t tsens_sec_to_msec_value = 1000;
 static uint32_t tsens_completion_timeout_hz = HZ/2;
 static uint32_t tsens_poll_check = 1;
@@ -196,6 +230,7 @@ enum tsens_calib_fuse_map_type {
 	TSENS_CALIB_FUSE_MAP_MSM8952,
 	TSENS_CALIB_FUSE_MAP_MDMFERMIUM,
 	TSENS_CALIB_FUSE_MAP_MSM8937,
+	TSENS_CALIB_FUSE_MAP_MSM8917,
 	TSENS_CALIB_FUSE_MAP_NUM,
 };
 
@@ -240,6 +275,7 @@ struct tsens_tm_device_sensor {
 	int				offset;
 	int				calib_data_point1;
 	int				calib_data_point2;
+	uint32_t			calib_mode;
 	uint32_t			slope_mul_tsens_factor;
 	struct tsens_thrshld_state	debug_thr_state_copy;
 	/* dbg_adc_code logs either the raw ADC code or temperature values in

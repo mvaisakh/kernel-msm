@@ -1630,6 +1630,11 @@ static int rpm_vreg_device_set_voltage_index(struct device *dev,
  * properties which are required to configure individual regulator
  * framework regulators for a given RPM regulator resource.
  */
+extern struct regulator_init_data
+	*of_get_regulator_init_data(struct device *dev,
+				    struct device_node *node,
+				    const struct regulator_desc *desc);
+
 static int rpm_vreg_device_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;

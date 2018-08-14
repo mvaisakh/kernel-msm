@@ -110,7 +110,7 @@ int tsens_get_mtc_zone_history(unsigned int zone , void *zone_hist);
  *		for clients to check back after a time duration.
  *		0 on success else error code on error.
  */
-int tsens_get_temp(struct tsens_device *dev, int *temp);
+//int tsens_get_temp(struct tsens_device *dev, int *temp);
 #else
 static inline int tsens_is_ready(void)
 { return -ENXIO; }

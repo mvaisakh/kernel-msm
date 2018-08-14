@@ -5178,11 +5178,13 @@ static void tsens_threshold_notify(struct therm_threshold *tsens_cb_data)
 	}
 }
 
+int tsens_get_temp(struct tsens_device *dev, int *temp);
+
 static int cpr_check_tsens(struct cpr_regulator *cpr_vreg)
 {
 	int rc = 0;
 	struct tsens_device tsens_dev;
-	unsigned long temp = 0;
+	int temp = 0;
 	bool disable;
 
 	if (tsens_is_ready() > 0) {
@@ -6022,6 +6024,11 @@ static void cpr_debugfs_base_remove(void)
 
 #endif
 
+extern struct regulator_init_data
+	*of_get_regulator_init_data(struct device *dev,
+				    struct device_node *node,
+				    const struct regulator_desc *desc);
+
 static int cpr_regulator_probe(struct platform_device *pdev)
 {
 	struct regulator_config reg_config = {};
@@ -6036,7 +6043,7 @@ static int cpr_regulator_probe(struct platform_device *pdev)
 		return -EINVAL;
 	}
 
-	init_data = of_get_regulator_init_data(&pdev->dev, pdev->dev.of_node);
+	init_data = of_get_regulator_init_data(&pdev->dev, pdev->dev.of_node, NULL);
 	if (!init_data) {
 		dev_err(dev, "regulator init data is missing\n");
 		return -EINVAL;

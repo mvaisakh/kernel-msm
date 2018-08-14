@@ -46,6 +46,12 @@ struct fixed_voltage_data {
  * tree node, returns a pointer to the populated structure of NULL if memory
  * alloc fails.
  */
+
+extern struct regulator_init_data
+	*of_get_regulator_init_data(struct device *dev,
+				    struct device_node *node,
+				    const struct regulator_desc *desc);
+
 static struct fixed_voltage_config *
 of_get_fixed_voltage_config(struct device *dev,
 			    const struct regulator_desc *desc)

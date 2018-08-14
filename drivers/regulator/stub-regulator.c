@@ -139,6 +139,11 @@ static void regulator_stub_cleanup(struct regulator_stub *vreg_priv)
 	kfree(vreg_priv);
 }
 
+extern struct regulator_init_data
+	*of_get_regulator_init_data(struct device *dev,
+				    struct device_node *node,
+				    const struct regulator_desc *desc);
+
 static int regulator_stub_probe(struct platform_device *pdev)
 {
 	struct regulator_config reg_config = {};
