@@ -1459,7 +1459,7 @@ static void update_cpu_topology(struct device *dev)
 	}
 
 	for (i = 0; i < cluster_cnt; i++) {
-		int idx = 0;
+		/* int idx = 0; */ //Unused
 
 		pr_debug("Cluster_ID:%d CPU's:%lu\n", cluster_id[i],
 				*cpumask_bits(&cluster_cpus[i]));
