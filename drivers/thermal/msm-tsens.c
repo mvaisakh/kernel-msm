@@ -2280,7 +2280,6 @@ static int tsens_hw_init(struct tsens_tm_device *tmdev)
 	return 0;
 }
 
-<< HEAD
 static int tsens_calib_msm8937_sensors(struct tsens_tm_device *tmdev)
 {
 	int i, tsens_base0_data = 0, tsens_base1_data = 0, ext_sen = 1;
