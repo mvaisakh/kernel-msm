@@ -59,8 +59,8 @@ SoCs:
 - MSM8916
   compatible = "qcom,msm8916"
 
-- MSM8917
-  compatible = "qcom,msm8917"
+- MSMGOLD
+  compatible = "qcom,msmgold"
 
 - MSM8920
   compatible = "qcom,msm8920"
@@ -206,6 +206,14 @@ compatible = "qcom,apq8096-sbc"
 compatible = "qcom,apq8096-liquid"
 compatible = "qcom,apq8937-cdp"
 compatible = "qcom,apq8937-mtp"
+compatible = "qcom,apq8037-cdp"
+compatible = "qcom,apq8037-mtp"
+compatible = "qcom,apqtitanium-cdp"
+compatible = "qcom,apqtitanium-mtp"
+compatible = "qcom,apq8098-cdp"
+compatible = "qcom,apq8098-mtp"
+compatible = "qcom,apq8098-qrd"
+compatible = "qcom,apq8098-svr"
 compatible = "qcom,mdm9630-cdp"
 compatible = "qcom,mdm9630-mtp"
 compatible = "qcom,mdm9630-sim"
@@ -246,6 +254,7 @@ compatible = "qcom,msm8920-mtp"
 compatible = "qcom,msm8940-cdp"
 compatible = "qcom,msm8940-mtp"
 compatible = "qcom,msm8940-rumi"
+compatible = "qcom,msmgold-rumi"
 compatible = "qcom,msm8926-cdp"
 compatible = "qcom,msm8926-mtp"
 compatible = "qcom,msm8926-qrd"

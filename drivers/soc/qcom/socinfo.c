@@ -549,9 +549,6 @@ static struct msm_soc_info cpu_of_id[] = {
 	[270] = {MSM_CPU_8929, "MSM8229"},
 	[271] = {MSM_CPU_8929, "APQ8029"},
 
-	/* Cobalt ID */
-	[292] = {MSM_CPU_COBALT, "MSMCOBALT"},
-
 	/* 8953 ID */
 	[293] = {MSM_CPU_8953, "MSM8953"},
 	[304] = {MSM_CPU_8953, "APQ8953"},
@@ -573,6 +570,27 @@ static struct msm_soc_info cpu_of_id[] = {
 	/*MSM8937 ID  */
 	[294] = {MSM_CPU_8937, "MSM8937"},
 	[295] = {MSM_CPU_8937, "APQ8937"},
+
+	/* Cobalt IDs */
+	[292] = {MSM_CPU_8998, "MSM8998"},
+	[319] = {MSM_CPU_8998, "APQ8098"},
+
+	/* Hamster ID */
+	[306] = {MSM_CPU_HAMSTER, "MSMHAMSTER"},
+
+	/* 660 ID */
+	[317] = {MSM_CPU_660, "SDM660"},
+	[324] = {MSM_CPU_660, "SDA660"},
+	[325] = {MSM_CPU_660, "SDM658"},
+	[326] = {MSM_CPU_660, "SDA658"},
+
+	/* 630 ID */
+	[318] = {MSM_CPU_630, "SDM630"},
+	[327] = {MSM_CPU_630, "SDA630"},
+
+	/* 636 ID */
+	[345] = {MSM_CPU_636, "SDM636"},
+	[346] = {MSM_CPU_636, "SDA636"},
 
 	/* Uninitialized IDs are not known to run Linux.
 	   MSM_CPU_UNKNOWN is set to 0 to ensure these IDs are
@@ -1283,9 +1301,38 @@ static void * __init setup_dummy_socinfo(void)
 		dummy_socinfo.id = 324;
 		strlcpy(dummy_socinfo.build_id, "sda660 - ",
 			sizeof(dummy_socinfo.build_id));
+
 	} else if (early_machine_is_msm8937()) {
 		dummy_socinfo.id = 294;
 		strlcpy(dummy_socinfo.build_id, "msm8937 - ",
+
+	} else if (early_machine_is_sdm658()) {
+		dummy_socinfo.id = 325;
+		strlcpy(dummy_socinfo.build_id, "sdm658 - ",
+			sizeof(dummy_socinfo.build_id));
+	} else if (early_machine_is_sda658()) {
+		dummy_socinfo.id = 326;
+		strlcpy(dummy_socinfo.build_id, "sda658 - ",
+			sizeof(dummy_socinfo.build_id));
+	} else if (early_machine_is_sdm630()) {
+		dummy_socinfo.id = 318;
+		strlcpy(dummy_socinfo.build_id, "sdm630 - ",
+			sizeof(dummy_socinfo.build_id));
+	} else if (early_machine_is_sda630()) {
+		dummy_socinfo.id = 327;
+		strlcpy(dummy_socinfo.build_id, "sda630 - ",
+			sizeof(dummy_socinfo.build_id));
+	} else if (early_machine_is_sdm636()) {
+		dummy_socinfo.id = 345;
+		strlcpy(dummy_socinfo.build_id, "sdm636 - ",
+			sizeof(dummy_socinfo.build_id));
+	} else if (early_machine_is_sda636()) {
+		dummy_socinfo.id = 346;
+		strlcpy(dummy_socinfo.build_id, "sda636 - ",
+			sizeof(dummy_socinfo.build_id));
+	} else if (early_machine_is_apq8098()) {
+		dummy_socinfo.id = 319;
+		strlcpy(dummy_socinfo.build_id, "apq8098 - ",
 			sizeof(dummy_socinfo.build_id));
 	}
 
