@@ -270,7 +270,7 @@ cmd_gzip = (cat $(filter-out FORCE,$^) | gzip -n -f -9 > $@) || \
 # ---------------------------------------------------------------------------
 
 # Generate an assembly file to wrap the output of the device tree compiler
-quiet_cmd_dt_S_dtb= DTB     $@
+quiet_cmd_dt_S_dtb= DTB  $H
 cmd_dt_S_dtb=						\
 (							\
 	echo '\#include <asm-generic/vmlinux.lds.h>'; 	\
@@ -282,7 +282,7 @@ cmd_dt_S_dtb=						\
 	echo '__dtb_$(*F)_end:';			\
 	echo '.global __dtb_$(*F)_end';			\
 	echo '.balign STRUCT_ALIGNMENT'; 		\
-) > $@
+) > $H
 
 $(obj)/%.dtb.S: $(obj)/%.dtb
 	$(call cmd,dt_S_dtb)
@@ -293,7 +293,7 @@ else
 DTC = $(objtree)/scripts/dtc/dtc
 endif
 
-quiet_cmd_dtc = DTC     $@
+quiet_cmd_dtc = DTC     $H
 cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
 	$(CPP) $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $< ; \
 	$(DTC) -O dtb -o -b 0 \
