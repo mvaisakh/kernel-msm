@@ -583,7 +583,7 @@ int tsens_get_hw_id_mapping(int thermal_sensor_num, int *sensor_client_id)
 			(!strcmp(id->compatible, "qcom,msm8998-tsens")) ||
 			(!strcmp(id->compatible, "qcom,sdm660-tsens")) ||
 			(!strcmp(id->compatible, "qcom,sdm630-tsens")) ||
-			(!strcmp(id->compatible, "qcom,msmhamster-tsens"))
+			(!strcmp(id->compatible, "qcom,msmhamster-tsens")) ||
 			(!strcmp(id->compatible, "qcom,msm8937-tsens"))) {
 			/* Assign client id's that is used to get the
 			 * controller and hw_sensor details
