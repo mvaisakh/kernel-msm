@@ -531,7 +531,8 @@ static int32_t get_tsens_sensor_for_client_id(struct tsens_tm_device *tmdev,
 		(!strcmp(id->compatible, "qcom,msm8998-tsens")) ||
 		(!strcmp(id->compatible, "qcom,sdm660-tsens")) ||
 		(!strcmp(id->compatible, "qcom,sdm630-tsens")) ||
-		(!strcmp(id->compatible, "qcom,msmhamster-tsens"))) {
+		(!strcmp(id->compatible, "qcom,msmhamster-tsens")) ||
+		(!strcmp(id->compatible, "qcom,msm8937-tsens"))) {
 		while (i < tmdev->tsens_num_sensor && !id_found) {
 			if (tmdev->sensor[i].sensor_client_id ==
 							sensor_client_id) {
@@ -662,7 +663,8 @@ int tsens_get_hw_id_mapping(int thermal_sensor_num, int *sensor_client_id)
 			(!strcmp(id->compatible, "qcom,msm8998-tsens")) ||
 			(!strcmp(id->compatible, "qcom,sdm660-tsens")) ||
 			(!strcmp(id->compatible, "qcom,sdm630-tsens")) ||
-			(!strcmp(id->compatible, "qcom,msmhamster-tsens"))) {
+			(!strcmp(id->compatible, "qcom,msmhamster-tsens"))
+			(!strcmp(id->compatible, "qcom,msm8937-tsens"))) {
 			/* Assign client id's that is used to get the
 			 * controller and hw_sensor details
 			 */
@@ -2682,7 +2684,7 @@ static int get_device_tree_data(struct platform_device *pdev,
 		(!strcmp(id->compatible, "qcom,sdm660-tsens")) ||
 		(!strcmp(id->compatible, "qcom,sdm630-tsens")) ||
 		(!strcmp(id->compatible, "qcom,msmhamster-tsens")) ||
-		!strcmp(id->compatible, "qcom,msm8937-tsens")))
+		(!strcmp(id->compatible, "qcom,msm8937-tsens")))
 			tmdev->tsens_valid_status_check = true;
 	}
 
@@ -2699,6 +2701,7 @@ static int get_device_tree_data(struct platform_device *pdev,
 		(!strcmp(id->compatible, "qcom,msmhamster-tsens")) ||
 		(!strcmp(id->compatible, "qcom,sdm660-tsens")) ||
 		(!strcmp(id->compatible, "qcom,sdm630-tsens")) ||
+		(!strcmp(id->compatible, "qcom,msm8937-tsens")) ||
 		(!strcmp(id->compatible, "qcom,msmtitanium-tsens"))) {
 		tmdev->tsens_critical_irq =
 				platform_get_irq_byname(pdev,
