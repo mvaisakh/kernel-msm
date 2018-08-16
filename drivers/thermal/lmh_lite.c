@@ -199,6 +199,8 @@ static DECLARE_RWSEM(lmh_sensor_access);
 static DEFINE_MUTEX(lmh_sensor_read);
 static DEFINE_MUTEX(lmh_odcm_access);
 static LIST_HEAD(lmh_sensor_list);
+static DEFINE_MUTEX(scm_lock);
+DEFINE_MUTEX(scm_lmh_lock);
 
 static int lmh_read(struct lmh_sensor_ops *ops, int *val)
 {
