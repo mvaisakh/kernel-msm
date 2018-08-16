@@ -2627,7 +2627,7 @@ static int therm_get_temp(uint32_t id, enum sensor_id_type type, int *temp)
 		break;
 	case THERM_TSENS_ID:
 		tsens_dev.sensor_num = id;
-		ret = tsens_get_temp(&tsens_dev, temp);
+		ret = tsens_get_temp(&tsens_dev, &temp);
 		if (ret) {
 			pr_err("Unable to read TSENS sensor:%d\n",
 				tsens_dev.sensor_num);
