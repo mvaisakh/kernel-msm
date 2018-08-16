@@ -1425,7 +1425,7 @@ static void update_cpu_topology(struct device *dev)
 	int cluster_id[NR_CPUS] = {[0 ... NR_CPUS-1] = -1};
 	cpumask_t cluster_cpus[NR_CPUS];
 	uint32_t i;
-	int cluster_cnt, sync_cluster_cnt = 0;
+	int cluster_cnt; //sync_cluster_cnt = 0;
 	struct cluster_info *temp_ptr = NULL;
 
 	cluster_info_probed = true;
