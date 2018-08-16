@@ -248,6 +248,7 @@
 #define TSENS3_MDM9607_POINT1_MASK		0x0003f000
 #define TSENS4_MDM9607_POINT1_MASK		0x0000003f
 #define TSENS_8994_EEPROM(n)			((n) + 0xd0)
+#define TSENS_8939_EEPROM(n)			((n) + 0xa0)
 #define TSENS_8994_EEPROM_REDUN_SEL(n)		((n) + 0x464)
 #define TSENS_REDUN_REGION1_EEPROM(n)		((n) + 0x1c0)
 #define TSENS_REDUN_REGION2_EEPROM(n)		((n) + 0x1c4)
@@ -3357,8 +3358,6 @@ static int tsens_calib_8939_sensors(struct tsens_tm_device *tmdev)
 
 	return 0;
 }
-
-#define TSENS_8939_EEPROM 0xa0
 
 static int tsens_calib_8916_sensors(struct tsens_tm_device *tmdev)
 {
