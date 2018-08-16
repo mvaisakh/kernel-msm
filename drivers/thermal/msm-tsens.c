@@ -252,7 +252,6 @@
 #define TSENS_REDUN_REGION3_EEPROM(n)		((n) + 0x1cc)
 #define TSENS_REDUN_REGION4_EEPROM(n)		((n) + 0x440)
 #define TSENS_REDUN_REGION5_EEPROM(n)		((n) + 0x444)
-#define 
 #define TSENS_EEPROM(n)			((n) + 0xd0
 //end of undeclared
 
