@@ -2604,7 +2604,7 @@ set_done:
 	return ret;
 }
 
-int32_t tsens_get_temp(struct tsens_device *dev, unsigned long *temp);
+int32_t tsens_get_temp(struct tsens_device *dev, int *temp);
 
 static int therm_get_temp(uint32_t id, enum sensor_id_type type, int *temp)
 {
