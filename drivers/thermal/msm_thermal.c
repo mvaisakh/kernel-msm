@@ -2609,7 +2609,7 @@ set_done:
 static int therm_get_temp(uint32_t id, enum sensor_id_type type, int *temp)
 {
 	int ret = 0;
-	struct tsens_device tsens_dev;
+	struct tsens_device; //tsens_dev;
 
 	if (!temp) {
 		pr_err("Invalid value\n");
