@@ -2618,14 +2618,14 @@ static int therm_get_temp(uint32_t id, enum sensor_id_type type, int *temp)
 	}
 
 	switch (type) {
-	/*case THERM_ZONE_ID:
+	case THERM_ZONE_ID:
 		ret = sensor_get_temp(id, temp);
 		if (ret) {
 			pr_err("Unable to read thermal zone sensor:%d\n", id);
 			goto get_temp_exit;
 		}
-		break;*/
-	case THERM_TSENS_ID:
+		break;
+	/*case THERM_TSENS_ID:
 		tsens_dev.sensor_num = id;
 		ret = tsens_get_temp(&tsens_dev, &temp);
 		if (ret) {
@@ -2633,7 +2633,7 @@ static int therm_get_temp(uint32_t id, enum sensor_id_type type, int *temp)
 				tsens_dev.sensor_num);
 			goto get_temp_exit;
 		}
-		break;
+		break;*/
 	default:
 		pr_err("Invalid type\n");
 		ret = -EINVAL;
