@@ -67,7 +67,7 @@
 #define LMH_GET_RECURSSIVE_DATA(desc_arg, cmd_idx, cmd_buf, payload, next, \
 	size, cmd_id, dest_buf, ret)					\
 	do {								\
-		int idx = 0;						\
+		int idx = 0, desc_arg.ret[0]= 0;						\
 		desc_arg.args[cmd_idx] = cmd_buf.list_start = next;	\
 		trace_lmh_event_call("GET_TYPE enter");			\
 		dmac_flush_range(payload, (void *)payload +             \
