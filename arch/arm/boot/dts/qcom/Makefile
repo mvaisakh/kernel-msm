@@ -165,7 +165,6 @@ ifeq ($(CONFIG_PAYTON_DTB),y)
 dtb-$(CONFIG_ARCH_SDM660) += sdm660-paytonpro-p0a.dtb
 endif
 
-else
 # Only include QC architecture specific DTBs
 dtb-$(CONFIG_ARCH_MSM8996) += msm8996-v2-pmi8994-cdp.dtb \
 	msm8996-v2-pmi8994-mtp.dtb \
