@@ -70,7 +70,7 @@ snd-soc-jz4740-codec-objs := jz4740.o
 snd-soc-l3-objs := l3.o
 snd-soc-lm4857-objs := lm4857.o
 snd-soc-lm49453-objs := lm49453.o
-snd-soc-madera-objs := madera.o
+obj-$(CONFIG_MADERA_SOUND) := madera.o
 snd-soc-madera-slimbus-objs := madera-slimbus.o
 snd-soc-max9768-objs := max9768.o
 snd-soc-max98088-objs := max98088.o
@@ -139,7 +139,7 @@ snd-soc-uda134x-objs := uda134x.o
 snd-soc-uda1380-objs := uda1380.o
 snd-soc-wcd9320-objs := wcd9320.o wcd9320-tables.o
 snd-soc-wcd9330-objs := wcd9330.o wcd9330-tables.o
-snd-soc-wcd9335-objs := wcd9335.o
+obj-$(CONFIG_WCD9335_SOUND) := wcd9335.o
 snd-soc-wcd934x-objs := wcd934x.o
 snd-soc-wcd9xxx-objs := wcd9xxx-resmgr.o wcd9xxx-mbhc.o wcd9xxx-common.o wcdcal-hwdep.o
 snd-soc-wcd9xxx-v2-objs := wcd9xxx-common-v2.o wcd9xxx-resmgr-v2.o
@@ -150,7 +150,7 @@ endif
 ifeq ($(CONFIG_COMMON_CLK_QCOM), y)
 	audio-ext-clock-up-objs := audio-ext-clk-up.o
 endif
-snd-soc-wcd-cpe-objs := wcd_cpe_services.o wcd_cpe_core.o
+obj-$(CONFIG_WCD_SOUND) := wcd_cpe_services.o wcd_cpe_core.o
 snd-soc-wsa881x-objs := wsa881x.o wsa881x-tables.o wsa881x-regmap.o wsa881x-temp-sensor.o
 snd-soc-wcd-mbhc-objs := wcd-mbhc-v2.o
 snd-soc-wsa881x-analog-objs := wsa881x-analog.o wsa881x-tables-analog.o

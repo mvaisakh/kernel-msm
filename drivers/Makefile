@@ -34,7 +34,7 @@ obj-y				+= amba/
 obj-$(CONFIG_DMADEVICES)	+= dma/
 
 # SOC specific infrastructure drivers.
-obj-y				+= soc/
+obj-$(CONFIG_SOC_MSM)		+= soc/
 
 obj-$(CONFIG_VIRTIO)		+= virtio/
 obj-$(CONFIG_XEN)		+= xen/
