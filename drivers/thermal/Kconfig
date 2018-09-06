@@ -391,15 +391,6 @@ config MTK_THERMAL
 	  Enable this option if you want to have support for thermal management
 	  controller present in Mediatek SoCs
 
-config MMI_SYS_TEMP
-	tristate "Motorola Surface Temperature Driver"
-	depends on THERMAL
-	default n
-	help
-	  This creates a sysfs property for front and back surface
-	  temperatures. These are meant to be populated by the a
-	  user space thermal management daemon.
-
 menu "Texas Instruments thermal drivers"
 depends on ARCH_HAS_BANDGAP || COMPILE_TEST
 depends on HAS_IOMEM
