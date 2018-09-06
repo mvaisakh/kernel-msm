@@ -68,4 +68,8 @@ KBUILD_CFLAGS += $(call cc-disable-warning, sign-compare)
 KBUILD_CFLAGS += $(call cc-disable-warning, format-zero-length)
 KBUILD_CFLAGS += $(call cc-disable-warning, uninitialized)
 endif
+
+# Disable noisy checks by default
+DTC_FLAGS += $(call dtc-option,-Wno-unit_address_vs_reg)
+
 endif

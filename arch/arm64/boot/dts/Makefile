@@ -39,6 +39,8 @@ DTB_LIST := $(dtb-y)
 endif
 targets += $(DTB_LIST)
 
+DTC_FLAGS += -p 1024
+
 dtbs: $(addprefix $(obj)/, $(DTB_LIST))
 
 clean-files := dts/*.dtb *.dtb
