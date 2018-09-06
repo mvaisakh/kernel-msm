@@ -1,6 +1,8 @@
+ifeq ($(CONFIG_MMI_DEVICE_DTBS),y)
 dtb-$(CONFIG_ARCH_QCOM)	+= apq8016-sbc.dtb msm8916-mtp.dtb
 dtb-$(CONFIG_ARCH_QCOM)	+= msm8996-mtp.dtb
 dtb-$(CONFIG_ARCH_QCOM)	+= apq8096-db820c.dtb
+endif
 
 ifeq ($(CONFIG_CEDRIC_DTB),y)
 dtb-$(CONFIG_ARCH_MSM8937) += msm8937-cedric-p1.dtb \
@@ -10,19 +12,19 @@ dtb-$(CONFIG_ARCH_MSM8937) += msm8937-cedric-p1.dtb \
 	msm8937-cedric-p5.dtb
 endif
 
-# Only include Motorola DTBs
-ifeq ($(CONFIG_MMI_DEVICE_DTBS),y)
 # Add 1k of padding to the DTBs to allow for environment variables
 # to be runtime added by the bootloader (i.e. /chosen properties)
 DTC_FLAGS := -p 1024
+
+ifeq ($(CONFIG_MMI_DEVICE_DTBS),y)
 
 dtb-$(CONFIG_ARCH_MSM8937) += msm8937-rumi.dtb \
 	msm8937-pmi8950-cdp.dtb \
 	msm8937-pmi8937-cdp.dtb \
 	msm8937-pmi8940-cdp.dtb \
 	msm8937-pmi8950-ext-codec-cdp.dtb \
-	msm8937-pmi8950-mtp.dtb \
 	msm8937-pmi8937-mtp.dtb \
+	msm8937-pmi8950-mtp.dtb \
 	msm8937-pmi8940-mtp.dtb \
 	msm8937-pmi8950-rcm.dtb \
 	msm8937-pmi8937-rcm.dtb \

@@ -266,3 +266,4 @@
 		qcom,master-offset = <4096>;
 	};
 };
+
