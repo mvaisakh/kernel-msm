@@ -34,8 +34,6 @@
 #include "peripheral-loader.h"
 #include "pil-q6v5.h"
 #include "pil-msa.h"
-#include "mmi-unit-info.h"
-#include <soc/qcom/bootinfo.h>
 
 #define PROXY_TIMEOUT_MS	10000
 #define MAX_SSR_REASON_LEN	256U
@@ -51,8 +49,6 @@ static void log_modem_sfr(void)
 {
 	u32 size;
 	char *smem_reason;
-
-	mmi_set_pureason(PU_REASON_MODEM_RESET);
 
 	smem_reason = smem_get_entry_no_rlock(SMEM_SSR_REASON_MSS0, &size, 0,
 							SMEM_ANY_HOST_FLAG);
