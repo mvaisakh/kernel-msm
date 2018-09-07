@@ -4,13 +4,13 @@ dtb-$(CONFIG_ARCH_QCOM)	+= msm8996-mtp.dtb
 dtb-$(CONFIG_ARCH_QCOM)	+= apq8096-db820c.dtb
 endif
 
-ifeq ($(CONFIG_CEDRIC_DTB),y)
-dtb-$(CONFIG_ARCH_MSM8937) += msm8937-cedric-p1.dtb \
+DTC_FLAGS := -p 1024
+
+dtb-$(CONFIG_ARCH_MSM8937) += msm8937-cedric.dtb \
 	msm8937-cedric-p2.dtb \
 	msm8937-cedric-p3.dtb \
 	msm8937-cedric-p4.dtb \
 	msm8937-cedric-p5.dtb
-endif
 
 # Add 1k of padding to the DTBs to allow for environment variables
 # to be runtime added by the bootloader (i.e. /chosen properties)
