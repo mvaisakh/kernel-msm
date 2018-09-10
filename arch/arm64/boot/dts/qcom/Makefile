@@ -6,7 +6,7 @@ endif
 
 DTC_FLAGS := -p 1024
 
-dtb-$(CONFIG_ARCH_MSM8937) += msm8937-cedric.dtb \
+dtb-$(CONFIG_ARCH_MSM8937) += msm8937-cedric-p1.dtb \
 	msm8937-cedric-p2.dtb \
 	msm8937-cedric-p3.dtb \
 	msm8937-cedric-p4.dtb \
