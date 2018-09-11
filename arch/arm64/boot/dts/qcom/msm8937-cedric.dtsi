@@ -184,7 +184,7 @@
 	/delete-property/ qcom,dc-thermal-mitigation;
 	qcom,parallel-charge-current-map = <3200 3200 0>,
 					   <2800 2800 0>,
-					   <2400 2400 0>
+					   <2400 2400 0>,
 					   <2000 2000 0>,
 					   <1600 1600 0>,
 					   <1200 1200 0>,
