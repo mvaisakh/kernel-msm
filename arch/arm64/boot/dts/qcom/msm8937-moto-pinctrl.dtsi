@@ -11,6 +11,32 @@
  */
 
 &tlmm{
+	nfc_irq_default: nfc_irq_default {
+		config {
+			pins = "gpio17";
+			drive-strength = <2>;
+			bias-pull-down;
+		};
+	};
+
+	nfc_ven_default: nfc_ven_default {
+		config {
+			pins = "gpio16";
+			drive-strength = <2>;
+			bias-pull-down;
+			output-low;
+		};
+	};
+
+	nfc_firm_default: nfc_firm_default {
+		config {
+			pins = "gpio130";
+			drive-strength = <2>;
+			bias-pull-down;
+			output-low;
+		};
+	};
+
 	i2c_3 {
 		i2c_3_active: i2c_3_active {
 			/* active state */
@@ -193,36 +219,6 @@
 		};
 	};
 
-	spi_6 {
-		spi_6_active: spi_6_active {
-			mux {
-				pins = "gpio41", "gpio42",
-						"gpio43", "gpio44";
-				function = "blsp_spi6";
-			};
-			config {
-				pins = "gpio41", "gpio42",
-						"gpio43", "gpio44";
-				drive-strength = <6>;
-				bias-disable;
-			};
-		};
-
-		spi_6_sleep: spi_6_sleep {
-			mux {
-				pins = "gpio41", "gpio42",
-						"gpio43", "gpio44";
-				function = "blsp_spi6";
-			};
-			config {
-				pins = "gpio41", "gpio42",
-						"gpio43", "gpio44";
-				drive-strength = <6>;
-				bias-disable;
-			};
-		};
-	};
-
 	spi_7 {
 		/* BLSP7 MOSI, MISO, CLK */
 		spi_7_active: spi_7_active {
@@ -249,6 +245,19 @@
 				pins = "gpio85", "gpio86", "gpio88";
 				drive-strength = <2>; /* 2 MA */
 				bias-pull-down; /* PULL Down */
+			};
+		};
+
+		spi7_cs0_active: spi7_cs0_active {
+			/* CS */
+			mux {
+				pins = "gpio87";
+				function = "blsp_spi7";
+			};
+			config {
+				pins = "gpio87";
+				drive-strength = <2>;
+				bias-disable;
 			};
 		};
 
