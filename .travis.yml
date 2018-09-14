@@ -11,7 +11,7 @@ before_install:
   - export ARCH=arm64 && export SUBARCH=arm64
   - export FINAL_KERNEL_ZIP=Eva-Alpha_cedric.zip
 script:
-  - make O=out cedric_defconfig
+  - make O=out eva_defconfig
   - make O=out -j$(nproc --all)
   - rm -rf $ANY_KERNEL2_DIR/zImage
   - export KERNEL_DIR=$PWD
