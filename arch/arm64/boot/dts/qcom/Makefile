@@ -4,17 +4,17 @@ dtb-$(CONFIG_ARCH_QCOM)	+= msm8996-mtp.dtb
 dtb-$(CONFIG_ARCH_QCOM)	+= apq8096-db820c.dtb
 endif
 
-DTC_FLAGS := -p 1024
-
 dtb-$(CONFIG_ARCH_MSM8937) += msm8937-cedric-p1.dtb \
 	msm8937-cedric-p2.dtb \
 	msm8937-cedric-p3.dtb \
 	msm8937-cedric-p4.dtb \
 	msm8937-cedric-p5.dtb
 
+ifeq ($(CONFIG_MMI_DEVICE_DTBS),y)
 # Add 1k of padding to the DTBs to allow for environment variables
 # to be runtime added by the bootloader (i.e. /chosen properties)
 DTC_FLAGS := -p 1024
+endif
 
 ifeq ($(CONFIG_MMI_DEVICE_DTBS),y)
 
@@ -112,6 +112,7 @@ dtb-$(CONFIG_ARCH_MSM8953) += msm8953-sim.dtb \
 	msm8953-pmi8937-ext-codec-mtp.dtb
 endif # CONFIG_MMI_DEVICE_DTBS
 
+ifeq ($(CONFIG_MMI_DEVICE_DTBS),y)
 ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
 	dtbo-$(CONFIG_ARCH_SDM845) += \
 		sdm845-cdp-overlay.dtbo \
@@ -705,6 +706,7 @@ dtb-$(CONFIG_ARCH_SDM429) += sdm429-mtp.dtb \
 	sda429-cdp.dtb
 
 endif
+endif # CONFIG_MMI_DEVICE_DTBS
 
 always		:= $(dtb-y)
 subdir-y	:= $(dts-dirs)
