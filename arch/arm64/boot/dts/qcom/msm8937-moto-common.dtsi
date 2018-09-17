@@ -30,7 +30,7 @@
 	reserved-memory {
 		ramoops_mem: ramoops_mem_region {
 			no-map;
-			reg = <0x0 0xae000000 0x0 0x80000>;
+			reg = <0x0 0xaf000000 0x0 0xb0000>;
 			label = "ramoops_mem";
 		};
 
