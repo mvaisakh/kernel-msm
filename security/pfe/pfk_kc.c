@@ -425,7 +425,6 @@ static int kc_update_entry(struct kc_entry *entry, const unsigned char *key,
 
 	ret = qti_pfk_ice_set_key(entry->key_index, entry->key,
 			entry->salt, s_type, data_unit, ice_rev);
-
 	kc_spin_lock();
 	return ret;
 }
