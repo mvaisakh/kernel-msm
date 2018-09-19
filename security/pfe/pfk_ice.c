@@ -76,7 +76,7 @@ enum {
 static uint8_t ice_buffer[ICE_BUFFER_SIZE];
 
 int qti_pfk_ice_set_key(uint32_t index, uint8_t *key, uint8_t *salt,
-			char *storage_type, unsigned int data_unit)
+			char *storage_type, unsigned int data_unit, int ice_rev)
 {
 	struct scm_desc desc = {0};
 	int ret, ret1;
